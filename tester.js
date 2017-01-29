@@ -7,6 +7,7 @@
 	write comments on every function and wherever necessary
 	
 	1- read data and get best songs of 2017 3 weeks list
+	get charts from three previous weeks, check the newest songs
 
 	2- Create formula to determine the best new songs from the new songs list
 	weeks on chart,peak position, if last week position > this.weeks position + 1 
@@ -31,7 +32,7 @@ fs.readFile('data.txt', function(err,data){
 				var artist = entry.artist;
 
 				//check how much time song has been on chart and add to an array if meets criteria
-				if(weeks === "--" || weeks < 3){
+				if(weeks == 1){
 					newSongsArray.push({"artist":artist, "songTitle":songTitle})
 				}		
 			}

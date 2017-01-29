@@ -9,6 +9,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "billboard-top-100": "^2.0.6"
+    "billboard-top-100": "^2.0.6",
+    "express": "^4.14.1",
+    "http-proxy": "^1.16.2",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
   }
 }
