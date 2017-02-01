@@ -33,13 +33,16 @@ module.exports = {
 
 					//check how much time song has been on chart and add to an array if meets criteria
 					if(weeks == 1){
-						newSongsArray.push({"artist":artist, "songTitle":songTitle});
+						//newSongsArray.push({"artist":artist, "songTitle":songTitle});
+						newSongsArray.push(entry)
 					}		
 				}
 			// print array of all new songs
-			for(var i = 0; i<newSongsArray.length; i++){
+			/*for(var i = 0; i<newSongsArray.length; i++){
 					console.log(newSongsArray[i].artist + " : "  + newSongsArray[i].songTitle);
-				}
+					console.log(entry);
+				} */
+				return newSongsArray;
 		},
 
 	hotNewSongs : function(){

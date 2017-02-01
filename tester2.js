@@ -10,51 +10,50 @@
 
 
 */
-var fs  = require('fs');
+/* compiler function
+Check Bad & Bougee Childish Gambino hypothesis
+want to compile a list of all the top songs released in January
+Check if I can fetch photos from billboard to display them
 
-fs.readFile('data.txt', function(err,data){
-	if(err) console.error(err);
-	else{
-		var dataArray = JSON.parse(data);
-		var newSongs = [];
-		/* Check new songs and compute algorithm that determines the position that it will be
-		will need new array to store data with and then store it in a file and then read from it later	
-		1st formula, if(last week position > thisweek's position) counter ++
+Should write to a certain file an array of the songs that I get and then iterate each week
+to see if it is on list
+First get all the new songs and then get the hottest list by saving the score from hottest algorithm
+ run tester 1 and then return an array of the objects of the songs information
+ run tester 2 on this data to compile the new list
 
-		*/
-		//iterate over the array of data
-		for(var i=0; i < dataArray.length; i++){	
-				var counter = 0;
-				var entry = dataArray[i];
+ get list, tester 1, 
 
-				var position = entry.position;
-				var weeks = position['Wks on Chart'];
-				var songTitle = entry.title;
-				var artist = entry.artist;
+ add to array of data in my.data txt as an array with objects of songs
+ after saving, add 1 week to function and then repeat until no data
+ */
+var fs = require('fs');
+var listGenerators = require('./tester.js');
+var date = new Date("January 10, 2017");
+var getSongs = require('./getSongs.js');
 
+var tester2  = function(){
+	/*test what getSongs returns when there is no data
+	 if getSongs returns ok, change weeks to one week later,weeks should be an array so that it can be converted to a string easily
+	*/
+	var week = date.getFullYear()+ "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
+	var message = getSongs.getSongs(week);
+	console.log(message);
 
-				//check how much time song has been on chart and add to an array if meets criteria
-				if(weeks < 3){
-					var thisWeek = entry.rank;
-					var lastWeek = position["Last Week"];
-					var peakPosition = position["Peak Position"];
-					counter = (100 - thisWeek + 1);
-					if(lastWeek > thisWeek){
-						counter = counter + ( lastWeek - thisWeek);
-					}else if(thisWeek === peakPosition){
-						counter = counter +(100 - thisWeek);
-					}
-					newSongs.push([songTitle,artist,counter]);
-				}	
-			}
-			newSongs.sort(function(a,b){
-					if(a[2] < b[2]) return 1;
-					if(a[2] > b[2]) return -1;
-					return 0;
-				});
-			console.log('Trending This Week \n')
-			for(var i= 0;i<newSongs.length; i++){
-				console.log(newSongs[i][0] + ' : ' + newSongs[i][1]);	
-			}
-	}
-});
+	if(message !== "no chart found"){
+		//newSongs should add i to an array and return that array
+		var newSongsArray = listGenerators.newSongs();
+		//how to check how to write data to an array in a file 
+		console.log(newSongsArray +' newSongsArray');
+		var myDataArray = fs.readFileSync('mydata.txt')
+		console.log(myDataArray + 'myDataArray');
+		myDataArray.push(newSongsArray);
+		fs.writeFileSync('mydata.txt', myDataArray);
+		//week is gotten by adding seven days to the date to get next weeks date
+		date.setDate(date.getDate()+7);
+		tester2();
+	}else{
+		console.log('Analysis completed Master!!');
+	}	
+};
+
+tester2();
