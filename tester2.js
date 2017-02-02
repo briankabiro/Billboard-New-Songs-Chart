@@ -38,19 +38,27 @@ var tester2  = function(){
 	var week = date.getFullYear()+ "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
 	var message = getSongs.getSongs(week);
 	console.log(message);
-
 	if(message !== "no chart found"){
 		//newSongs should add i to an array and return that array
-		var newSongsArray = listGenerators.newSongs();
-		//how to check how to write data to an array in a file 
-		console.log(newSongsArray +' newSongsArray');
-		var myDataArray = fs.readFileSync('mydata.txt')
-		console.log(myDataArray + 'myDataArray');
-		myDataArray.push(newSongsArray);
-		fs.writeFileSync('mydata.txt', myDataArray);
-		//week is gotten by adding seven days to the date to get next weeks date
-		date.setDate(date.getDate()+7);
-		tester2();
+		
+		var function1 = function(callback){
+			newSongsArray = listGenerators.newSongs();
+			callback(newSongsArray);
+		}
+		var function2 = function(newSongsArray){
+			console.log(newSongsArray +' newSongsArray');
+			//var myDataArray = fs.readFileSync('mydata.txt')
+			var myDataArray = [];
+			console.log(myDataArray + 'myDataArray');
+			myDataArray.push(newSongsArray);
+			fs.writeFileSync('mydata.txt', myDataArray);
+			//week is gotten by adding seven days to the date to get next weeks date
+			date.setDate(date.getDate()+7);
+			tester2();	
+		}
+		function1(function2());
+		//how to check how to write data to an array in a file read about promises and mongodb
+		
 	}else{
 		console.log('Analysis completed Master!!');
 	}	
