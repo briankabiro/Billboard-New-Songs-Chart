@@ -42,6 +42,7 @@ module.exports = {
 					console.log(newSongsArray[i].artist + " : "  + newSongsArray[i].songTitle);
 					console.log(entry);
 				} */
+				console.log(newSongsArray);
 				return newSongsArray;
 		},
 
