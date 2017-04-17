@@ -9,13 +9,11 @@ get full chart with data, store in text file, read and extract songs from data
 console.log(moment().day(-1).format("YYYY-MM-DD"));*/
 var fs = require('fs');
 var moment = require('moment')
-var await = require('await')
-
-getSongs.getSongs(moment().day(-1).format("YYYY-MM-DD"));
-var getThings = await('getSong',"compileSong")
+var async = require('asyncawait/async')
+var await = require("asyncawait/await")
+var billboard = require("billboard-top-100").getChart;
 
 function getSongs(week){
-	var billboard = require("billboard-top-100").getChart;
 	billboard('hot-100', week, function(songs,err){
 	if(err) console.error(err);
 
@@ -53,23 +51,21 @@ function newSongs(){
 	return newSongsArray;
 }
 
-getThings.then(function(got){
-	got.getSong;
-	got.compileSong;
-})
 
 
 var weeks = moment().week() - 1;
-var week = -1;
-for(var i = 0; i<weeks; i++){
-	console.log(weeks)
-}
+var week = -1;	
+console.log(weeks)
 
 //get songs, compile songs add to database
 
+var function1 = async(function(){
+	await (getSongs(moment().day(-1).format("YYYY-MM-DD")));
+	await (newSongs());
+	await (console.log("finished"));
+})
 
-
-
+function1().then();
 
 
 

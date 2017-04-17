@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "asyncawait": "^1.0.6",
     "await": "^0.2.6",
     "billboard-top-100": "^2.0.6",
     "express": "^4.15.2",
