@@ -9,23 +9,10 @@ get full chart with data, store in text file, read and extract songs from data
 console.log(moment().day(-1).format("YYYY-MM-DD"));*/
 var fs = require('fs');
 var moment = require('moment')
-var async = require('asyncawait/async')
-var await = require("asyncawait/await")
-var billboard = require("billboard-top-100").getChart;
-
-function getSongs(week){
-	billboard('hot-100', week, function(songs,err){
-	if(err) console.error(err);
-
-	else if(songs !== false){
-		var data = JSON.stringify(songs);
-		fs.writeFile('data.txt',data,'utf-8',function(err){
-			if(err) console.error(err);
-			console.log('Chart was saved, master');		
-			});
-		}
-	});
-}
+var async = require('asyncawait/async');
+var await = require("asyncawait/await");
+var getSongs = require('./getSongs');
+var listGenerators = require('./tester.js');
 
 function newSongs(){
 	var data = fs.readFileSync('data.txt', 'utf-8');
@@ -51,21 +38,7 @@ function newSongs(){
 	return newSongsArray;
 }
 
-
-
-var weeks = moment().week() - 1;
-var week = -1;	
-console.log(weeks)
-
-//get songs, compile songs add to database
-
-var function1 = async(function(){
-	await (getSongs(moment().day(-1).format("YYYY-MM-DD")));
-	await (newSongs());
-	await (console.log("finished"));
-})
-
-function1().then();
-
-
-
+//const daWeek = moment().day(-1).format("YYYY-MM-DD")
+//getSongs.getSongs(daWeek);
+//newSongs();
+listGenerators.hotNewSongs();
