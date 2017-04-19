@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<html lang="en">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Billboard Da Chart</title>
+	</head>
+	<body>
+		<div id="container">
+			<div>This is the page</div>
+			<button id="fetch">Get</button>
+			<div id="results">			
+			</div>
+		</div>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+			var socket = io();
+			$("#fetch").click(function(e){
+				e.preventDefault();
+				socket.emit('leta')
+				return false;
+			});
+			socket.on('results',function(data){
+				console.log(data);
+			})
+		</script>
+	</body>
+</html>

@@ -40,5 +40,5 @@ function newSongs(){
 
 //const daWeek = moment().day(-1).format("YYYY-MM-DD")
 //getSongs.getSongs(daWeek);
-//newSongs();
-listGenerators.hotNewSongs();
+newSongs();
+//listGenerators.hotNewSongs();
