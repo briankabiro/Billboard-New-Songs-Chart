@@ -10,10 +10,12 @@
 		<div id="container">
 			<div>This is the page</div>
 			<button id="fetch">Get</button>
+			<h3>New Songs</h3>
 			<div id="results">			
 			</div>
 		</div>
 		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<script>
 			var socket = io();
 			$("#fetch").click(function(e){
@@ -22,7 +24,26 @@
 				return false;
 			});
 			socket.on('results',function(data){
+				$(".results").html("");
 				console.log(data);
+				for(var key in data){
+					var innerObject = data[key];
+					var songsArray = innerObject["newsongs"]; 
+					songsArray.forEach(function(song){
+						$.ajax({ 
+						   url:song.cover, 
+						   timeout:50,
+						   success: function(data) {
+						   		$("#results").append("<img src=" + data +"/>");
+						   },
+						   error: function(r,x) {
+						   		console.log('failed to load image')
+						   }
+						});	
+						//$("#results").append(image)
+						$("#results").append("<div><p>"+song.artist+":"+ song.title + "</p></div>")								
+					})
+				}
 			})
 		</script>
 	</body>
