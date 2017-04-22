@@ -8,7 +8,10 @@
 	</head>
 	<body>
 		<div id="container">
-			<div>This is the page</div>
+			<form>
+				<label>Date</label>
+				<input type="date" name="Week">
+			</form>
 			<button id="fetch">Get</button>
 			<h3>New Songs</h3>
 			<div id="results">			
@@ -24,8 +27,7 @@
 				return false;
 			});
 			socket.on('results',function(data){
-				$(".results").html("");
-				console.log(data);
+				$(".results").html("")
 				for(var key in data){
 					var innerObject = data[key];
 					var songsArray = innerObject["newsongs"]; 
@@ -37,7 +39,7 @@
 						   		$("#results").append("<img src=" + data +"/>");
 						   },
 						   error: function(r,x) {
-						   		console.log('failed to load image')
+						   		console.log('failed to load image', r)
 						   }
 						});	
 						//$("#results").append(image)
