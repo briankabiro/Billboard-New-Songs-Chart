@@ -27,24 +27,30 @@
 				return false;
 			});
 			socket.on('results',function(data){
+				function getImage(url){
+					return new Promise(function(resolve, reject){
+						var img = new Image()
+						img.onload = function(){
+							resolve(url)
+						}
+						img.onerror = function(){
+							reject(url)
+						}
+						img.src = url
+					})
+				}
 				$(".results").html("")
 				for(var key in data){
 					var innerObject = data[key];
 					var songsArray = innerObject["newsongs"]; 
 					songsArray.forEach(function(song){
-						$.ajax({ 
-						   url:song.cover, 
-						   timeout:50,
-						   success: function(data) {
-						   		$("#results").append("<img src=" + data +"/>");
-						   },
-						   error: function(r,x) {
-						   		console.log('failed to load image', r)
-						   }
-						});	
-						//$("#results").append(image)
-						$("#results").append("<div><p>"+song.artist+":"+ song.title + "</p></div>")								
+						getImage(song.cover).then(function(successurl){
+							document.getElementbyId('results').innerHTML = '<img src="' + successurl + '" />'
+						}).catch(err => {
+							console.error(err)
+						})
 					})
+
 				}
 			})
 		</script>
