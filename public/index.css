@@ -1,0 +1,23 @@
+#title{
+  margin:1em 0 1em 0;
+}
+
+#song-artiste {
+  color: grey;
+  font-size: 0.9em;
+}
+
+.song-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+.new-song-section, .hot-song-section{
+  background-color: white;
+}
+
+#song-cover{
+  height: 5em;
+  width: 5em;
+}
