@@ -10,6 +10,6 @@ Our proprietary algorithm goes through the Billboard list released each week to 
 * jQuery
 
 #### Todo
-* Add cover art
-* Add emojis
-* Add automatic data refresh each week
+  - [ ] Add cover art
+  - [ ] Add emojis
+  - [ ] Add automatic data refresh each week
