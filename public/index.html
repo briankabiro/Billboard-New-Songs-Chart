@@ -1,58 +1,60 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<html lang="en">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Billboard Da Chart</title>
-	</head>
-	<body>
-		<div id="container">
-			<form>
-				<label>Date</label>
-				<input type="date" name="Week">
-			</form>
-			<button id="fetch">Get</button>
-			<h3>New Songs</h3>
-			<div id="results">			
-			</div>
-		</div>
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<script>
-			var socket = io();
-			$("#fetch").click(function(e){
-				e.preventDefault();
-				socket.emit('leta')
-				return false;
-			});
-			socket.on('results',function(data){
-				function getImage(url){
-					return new Promise(function(resolve, reject){
-						var img = new Image()
-						img.onload = function(){
-							resolve(url)
-						}
-						img.onerror = function(){
-							reject(url)
-						}
-						img.src = url
-					})
-				}
-				$(".results").html("")
-				for(var key in data){
-					var innerObject = data[key];
-					var songsArray = innerObject["newsongs"]; 
-					songsArray.forEach(function(song){
-						getImage(song.cover).then(function(successurl){
-							document.getElementbyId('results').innerHTML = '<img src="' + successurl + '" />'
-						}).catch(err => {
-							console.error(err)
-						})
-					})
+    <head>
+        <meta charset="utf-8">
+        <html lang="en">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-				}
-			})
-		</script>
-	</body>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Billboard Da Chart</title>
+    </head>
+    
+    <body>
+        <h2 id="title" class="text-center font-weight-bolder">Billboard Songs Chart</h2>
+
+        <div class="container">
+          <div class="song-section">
+            <div class="hot-song-section">
+              <h4><i class="fa fa-fire"></i> songs this week</h4>
+              <div id="results">
+                <ol></ol>
+              </div>              
+            </div>
+
+            <div class="new-song-section">
+              <h4>New songs this week</h4>
+              <div id="new-songs-results">
+                <ol></ol>
+              </div> 
+            </div>
+          </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+              $('#results ol').html('')
+              $('#new-songs-results ol').html('')
+              $.ajax({
+                type: 'GET',
+                url:'http://localhost:8080/send_data',
+              }).then((data) => {
+
+                data.hot.forEach((song) => {
+                  console.log(song[3])
+                    $('#results ol').append("<li><span id='song-title'>" + song[0] + "</span> - <span id='song-artiste'>" + song[1] + "</span></li>")
+                })
+
+                data.new.forEach((song) => {
+                    $('#new-songs-results ol').append(
+                      "<li><span id='song-title'>" + song.title + "</span> - <span id='song-artiste'>" + song.artist + "</span></li>")
+                })                
+              })
+            })
+        </script>
+    </body>
 </html>

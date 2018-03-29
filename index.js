@@ -34,11 +34,10 @@ function newSongs(){
 				newSongsArray.push(entry)
 			}		
 		}
-	console.log(newSongsArray);
 	return newSongsArray;
 }
 
-//const daWeek = moment().day(-1).format("YYYY-MM-DD")
+const daWeek = moment().day(-1).format("YYYY-MM-DD")
 //getSongs.getSongs(daWeek);
-newSongs();
-//listGenerators.hotNewSongs();
+//newSongs();
+listGenerators.hotNewSongs();

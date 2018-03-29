@@ -8,12 +8,11 @@ module.exports = {
 
 		else if(songs !== false){
 			var data = JSON.stringify(songs);
-			fs.writeFile('data.txt',data,'utf-8',function(err){
+			fs.writeFile('data.txt',data,'utf-8', function(err){
 				if(err) console.error(err);
 				console.log('Chart was saved, master');		
 				});
 			}
-
 	});
 	
 	}
