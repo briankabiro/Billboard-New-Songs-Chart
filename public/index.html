@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Billboard Da Chart</title>
     </head>
-    
+
     <body>
         <h2 id="title" class="text-center font-weight-bolder">Billboard Songs Chart</h2>
 
@@ -41,7 +41,7 @@
               $('#new-songs-results ol').html('')
               $.ajax({
                 type: 'GET',
-                url:'http://localhost:8080/send_data',
+                url:'/send_data',
               }).then((data) => {
 
                 data.hot.forEach((song) => {
