@@ -12,8 +12,8 @@ const listGenerators = require('./tester.js');
 var getSongs = require('./getSongs.js')
 
 
-var j = cron.scheduleJob({dayOfWeek: 3}, function(){
-  print('Today is Wednesday: fetching new songs');
+var j = cron.scheduleJob({dayOfWeek: 4}, function(){
+  print('Today is Thursday: fetching new songs');
   let week = moment().format('YYYY-MM-DD');
   getSongs.getSongs(week);
 });
