@@ -20,7 +20,7 @@ function newSongs(){
 	var dataArray = JSON.parse(data);
 	var newSongsArray = [];
 	//iterate over the array of data
-	for(var i=0; i < dataArray.length; i++){	
+	for(var i=0; i < dataArray.length; i++){
 			var entry = dataArray[i];
 
 			var position = entry.position;
