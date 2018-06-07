@@ -6,17 +6,10 @@ var io = require('socket.io')(server);
 var mongodb = require('mongodb');
 var moment = require('moment');
 var cron = require('node-schedule');
-var port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 const listGenerators = require('./tester.js');
 var getSongs = require('./getSongs.js')
-
-
-var j = cron.scheduleJob({dayOfWeek: 4}, function(){
-  print('Today is Thursday: fetching new songs');
-  let week = moment().format('YYYY-MM-DD');
-  getSongs.getSongs(week);
-});
 
 app.use(express.static('public'));
 
@@ -25,8 +18,8 @@ app.get('/', function(req,res){
 });
 
 app.get('/send_data', function(req, res, next){
-	hotNewSongs = listGenerators.hotNewSongs();
-	newSongs = listGenerators.newSongs();
+  hotNewSongs = listGenerators.hotNewSongs();
+  newSongs = listGenerators.newSongs();
 	next()
 }, function(req, res){
 	res.json({
@@ -37,4 +30,6 @@ app.get('/send_data', function(req, res, next){
 
 server.listen(port, function(){
 	console.log("Listening on port number", port);
+  let week = moment().format('YYYY-MM-DD');
+  getSongs.getSongs(week);
 });
