@@ -13,3 +13,4 @@ Our proprietary algorithm goes through the Billboard Top 100 list released each 
   - [ ] Add cover art
   - [ ] Add emojis
   - [x] Add automatic data refresh each week
+  - [ ] Add date period of songs that are shown
