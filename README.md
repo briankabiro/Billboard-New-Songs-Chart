@@ -2,7 +2,7 @@
 
 #### Description
 
-Our proprietary algorithm goes through the Billboard list released each week to determine the hottest and newest songs each week. The playlist is updated on Wednesday of each week.
+Our proprietary algorithm goes through the Billboard Top 100 list released each week to determine the hottest and newest songs. The playlist is updated on Wednesday - save the date.
 
 #### Built with:
 * Node JS
