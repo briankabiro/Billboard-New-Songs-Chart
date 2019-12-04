@@ -1,16 +1,19 @@
-## Billboard New Songs Chart
+## Billboard Hottest and Newest Charts
 
 #### Description
 
-Our proprietary algorithm goes through the Billboard Top 100 list released each week to determine the hottest and newest songs. The playlist is updated on Wednesday - save the date.
-
-#### Built with:
-* Node JS
-* Express JS
-* jQuery
+Our proprietary algorithm determines the hottest and newest songs from the Billboard Top 100 list each week.
 
 #### Todo
-  - [ ] Add cover art
-  - [ ] Add emojis
-  - [x] Add automatic data refresh each week
-  - [ ] Add date period of songs that are shown
+  - [ ] Refactor methods for generating charts as helpers in separate files
+  - [ ] Use Postgres db instead of storing on the file system
+  - [ ] Refactor the app to use React JS
+  - [ ] improve UI e.g add colors, add cover art to each song make it appealing
+  - [ ] Confirm automatic data refresh each week
+  - [ ] Deploy to Heroku
+
+
+#### Built with:
+
+* Node JS
+* Express JS
